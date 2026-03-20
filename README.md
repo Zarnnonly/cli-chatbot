@@ -20,7 +20,7 @@ A simple command-line interface for chatting with AI using OpenAI-compatible API
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ai-chat-cli.git
+git clone https://github.com/Zarnnonly/cli-chatbot
 cd ai-chat-cli
 ```
 
