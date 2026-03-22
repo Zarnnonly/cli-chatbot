@@ -65,56 +65,6 @@ def send_msg(history, userMsg):
         print ("Error: ",error)
         return None
 
-
-"""
-while True:
-    userMsg=input("Enter the prompt that will be sent to the API endpoint: ")
-    
-    promptdict.get(userMsg)
-    #continue
-
-    if userMsg == "/quit":
-        break
-
-    if userMsg == "/clear":
-        history.clear()
-        print ("History Cleared!")
-        continue
-
-    if userMsg == "/save":
-        save_chat(history)
-        continue
-
-    if userMsg == "/list":
-        list_chat()
-        continue
-    
-    if userMsg.startswith("/load"):
-        parts = userMsg.split()
-
-        if len(parts) == 1:
-            print ("Choose which chat to load!, use /list to see all saves")
-            continue
-        else:
-            number = int(parts[1])
-            loaded = load(number)
-
-        if loaded is not None:
-            history = loaded
-            continue
-    
-    if userMsg == "/history":
-        list_history()
-        continue
-
-    ai_response = send_msg(history, userMsg)
-    if ai_response:
-        history.append({"role": "user", "content": userMsg})
-        history.append({"role": "assistant", "content": ai_response})
-        print(f"\nAI: {ai_response}\n")
-"""
-
-
 ##GET RID OF THAT LONG IF ELSE
 promptdict = {
     "/quit": exit,
@@ -122,29 +72,29 @@ promptdict = {
     "/save" : save_chat(history),
     "/list" : list_chat(),
     "/history": list_history()
-
-
 }
 
-def mainfunc(history: list,promptdict: dict):
+def mainfunc(history: list, promptdict: dict):
     while True:
         userMsg=input("Enter the prompt that will be sent to the API endpoint: ")
-        
-        call = promptdict.get(userMsg)
-        #continue
 
-        
         if userMsg.startswith("/load"):
             parts = userMsg.split()
 
             if len(parts) == 1:
                 print ("Choose which chat to load!, use /list to see all saves")
                 continue
+
             number = int(parts[1])
             loaded = load(number)
 
-            history = loaded
-        
+            if loaded is not None:
+                history = loaded
+                continue
+
+        else :
+            promptdict.get(userMsg)
+            continue
 
         ai_response = send_msg(history, userMsg)
         if ai_response:
