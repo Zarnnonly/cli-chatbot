@@ -68,10 +68,10 @@ def send_msg(history, userMsg):
 ##GET RID OF THAT LONG IF ELSE
 promptdict = {
     "/quit": exit,
-    "/clear" : history.clear(),
-    "/save" : save_chat(history),
-    "/list" : list_chat(),
-    "/history": list_history()
+    "/clear" : history.clear,
+    "/save" : lambda: save_chat(history),
+    "/list" : list_chat,
+    "/history": list_history
 }
 
 def mainfunc(history: list, promptdict: dict):
@@ -88,12 +88,13 @@ def mainfunc(history: list, promptdict: dict):
             number = int(parts[1])
             loaded = load(number)
 
-            if loaded is not None:
+            if loaded:
                 history = loaded
                 continue
 
-        else :
-            promptdict.get(userMsg)
+        cmd = promptdict.get(userMsg)
+        if cmd:
+            cmd()
             continue
 
         ai_response = send_msg(history, userMsg)
